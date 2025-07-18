@@ -386,22 +386,98 @@ body {
 .modal.hidden {
     display: none;
 }
+/* Sleek modal improvements */
 .modal-content {
     background: #fff;
-    border-radius: 10px;
-    padding: 2rem;
+    border-radius: 16px;
+    padding: 2.5rem 2rem 2rem 2rem;
     min-width: 320px;
-    max-width: 90vw;
-    box-shadow: 0 4px 24px rgba(35,41,70,0.15);
+    max-width: 95vw;
+    box-shadow: 0 8px 32px rgba(35,41,70,0.18);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 .close-modal {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 1.5rem;
+    top: 1.2rem;
+    right: 1.2rem;
+    width: 36px;
+    height: 36px;
+    background: #f4f6fa;
+    border-radius: 50%;
     color: #888;
+    font-size: 1.7rem;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    z-index: 2;
+}
+.close-modal:hover {
+    background: #eebbc3;
+    color: #232946;
+}
+.modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #232946;
+    letter-spacing: 0.5px;
+}
+#modal-body > div, #modal-body > label {
+    margin-bottom: 1.1rem;
+}
+#modal-body label {
+    display: block;
+    font-weight: 600;
+    color: #232946;
+    margin-bottom: 0.4rem;
+}
+#modal-body input[type="text"],
+#modal-body input[type="email"],
+#modal-body input[type="password"],
+#modal-body input[type="date"],
+#modal-body textarea,
+#modal-body select {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 7px;
+    font-size: 1rem;
+    background: #f4f6fa;
+    color: #232946;
+    margin-bottom: 0.2rem;
+    transition: border 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+}
+#modal-body input:focus,
+#modal-body textarea:focus,
+#modal-body select:focus {
+    border: 1.5px solid #eebbc3;
+    outline: none;
+    box-shadow: 0 0 0 2px #eebbc355;
+}
+#modal-body button {
+    background: #eebbc3;
+    color: #232946;
+    font-weight: 700;
+    border: none;
+    border-radius: 7px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 2px 8px #eebbc344;
+}
+#modal-body button:hover {
+    background: #ffd6e0;
+    color: #232946;
 }
 @media (max-width: 900px) {
     .dashboard-container {
