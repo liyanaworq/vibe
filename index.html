@@ -3,352 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex Chen | Creative Developer</title>
+    <title>Knowledge CRM Dashboard</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <span class="logo-text">LK</span>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="logo-text sidebar-logo">KCRM</span>
+                <button id="sidebar-toggle-btn" class="sidebar-toggle-btn"><i class="fas fa-angle-double-left"></i></button>
             </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#skills" class="nav-link">Skills</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#projects" class="nav-link">Projects</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
-                </li>
+            <ul class="sidebar-menu">
+                <li class="sidebar-item active" data-section="dashboard"><i class="fas fa-chart-line"></i> <span>Dashboard</span></li>
+                <li class="sidebar-item" data-section="knowledge"><i class="fas fa-book"></i> <span>Knowledge Base</span></li>
+                <li class="sidebar-item" data-section="contacts"><i class="fas fa-users"></i> <span>Contacts</span></li>
+                <li class="sidebar-item" data-section="tickets"><i class="fas fa-ticket-alt"></i> <span>Tickets</span></li>
+                <li class="sidebar-item" data-section="analytics"><i class="fas fa-chart-pie"></i> <span>Analytics</span></li>
+                <li class="sidebar-item" data-section="settings"><i class="fas fa-cog"></i> <span>Settings</span></li>
             </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+        </aside>
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <h1 class="page-title">Dashboard</h1>
+                </div>
+                <div class="topbar-right">
+                    <div class="user-info">
+                        <span class="user-name">Liyana Khairul</span>
+                        <img src="https://ui-avatars.com/api/?name=Liyana+Khairul" class="user-avatar" alt="User Avatar">
+                    </div>
+                </div>
+            </header>
+            <!-- Sections -->
+            <section id="dashboard-section" class="section active p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-xl shadow p-6 text-center">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-2">Total Articles</h3>
+                        <p class="text-3xl font-bold text-pink-400" id="total-articles">0</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow p-6 text-center">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-2">Contacts</h3>
+                        <p class="text-3xl font-bold text-blue-400" id="total-contacts">0</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow p-6 text-center">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-2">Open Tickets</h3>
+                        <p class="text-3xl font-bold text-purple-400" id="open-tickets">0</p>
+                    </div>
+                    <div class="bg-white rounded-xl shadow p-6 text-center">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-2">Resolved Tickets</h3>
+                        <p class="text-3xl font-bold text-green-400" id="resolved-tickets">0</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow p-6">
+                    <h2 class="text-lg font-semibold text-gray-700 mb-4">Recent Activity</h2>
+                    <ul id="recent-activity-list" class="divide-y divide-gray-100">
+                        <!-- Populated by JS -->
+                    </ul>
+                </div>
+            </section>
+            <section id="knowledge-section" class="section">
+                <div class="section-header"> 
+                    <button class="btn btn-primary" id="add-article-btn"><i class="fas fa-plus"></i> Add Article</button>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Last Updated</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="knowledge-table-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </section>
+            <section id="contacts-section" class="section">
+                <div class="section-header"> 
+                    <button class="btn btn-primary" id="add-contact-btn"><i class="fas fa-plus"></i> Add Contact</button>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Company</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contacts-table-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </section>
+            <section id="tickets-section" class="section">
+                <div class="section-header"> 
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Ticket ID</th>
+                            <th>Subject</th>
+                            <th>Status</th>
+                            <th>Assigned To</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tickets-table-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </section>
+            <section id="analytics-section" class="section">
+                <div class="section-header"> 
+                </div>
+                <div class="analytics-placeholder">
+                    <p>Analytics charts and reports will appear here.</p>
+                </div>
+            </section>
+            <section id="settings-section" class="section">
+                <div class="section-header"> 
+                </div>
+                <div class="settings-placeholder">
+                    <p>Settings options will appear here.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md relative">
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl" id="close-modal">&times;</button>
+            <div id="modal-body" class="space-y-4">
+                <!-- Populated by JS -->
             </div>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span>👋 Available for opportunities</span>
-                </div>
-                <h1 class="hero-title">
-                    Creative Developer & 
-                    <span class="gradient-text">Digital Artist</span>
-                </h1>
-                <p class="hero-description">
-                    I craft immersive digital experiences that blend cutting-edge technology with artistic vision. 
-                    From web apps to interactive installations, I bring ideas to life.
-                </p>
-                <div class="hero-buttons">
-                    <button class="btn btn-primary">View My Work</button>
-                    <button class="btn btn-secondary">Download CV</button>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-number">10+</span>
-                        <span class="stat-label">Projects</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">5+</span>
-                        <span class="stat-label">Years</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">Satisfaction</span>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="floating-card">
-                    <div class="card-content">
-                        <div class="avatar">
-                            <div class="avatar-image"></div>
-                        </div>
-                        <h3>Liyana Khairul</h3>
-                        <p>Full Stack Developer</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Angular</span>
-                            <span class="tech-tag">Firebase</span>
-                            <span class="tech-tag">Express</span>
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">ASP.net</span>
-                            <span class="tech-tag">Java</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">About Me</h2>
-                <p class="section-subtitle">Get to know the person behind the code</p>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <p class="about-paragraph">
-                        Hey there! I'm Liyana, a passionate developer who believes in the power of technology to create meaningful experiences. 
-                        When I'm not coding, you'll find me exploring new design trends, experimenting with AI, or contributing to open-source projects.
-                    </p>
-                    <p class="about-paragraph">
-                        I specialize in building modern web applications with a focus on user experience and performance. 
-                        My approach combines technical expertise with creative problem-solving to deliver solutions that not only work flawlessly 
-                        but also delight users.
-                    </p>
-                    <div class="about-features">
-                        <div class="feature">
-                            <i class="fas fa-rocket"></i>
-                            <span>Fast & Responsive</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-palette"></i>
-                            <span>Creative Design</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>Secure & Reliable</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <div class="image-container">
-                        <div class="image-placeholder"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Skills & Technologies</h2>
-                <p class="section-subtitle">Tools and technologies I work with</p>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Frontend</h3>
-                    <div class="skill-items">
-                        <div class="skill-item" data-skill="React">
-                            <div class="skill-icon">⚛️</div>
-                            <span>React</span>
-                        </div>
-                        <div class="skill-item" data-skill="Vue">
-                            <div class="skill-icon">💚</div>
-                            <span>Angular</span>
-                        </div>
-                        <div class="skill-item" data-skill="TypeScript">
-                            <div class="skill-icon">🔷</div>
-                            <span>TypeScript</span>
-                        </div>
-                        <div class="skill-item" data-skill="Tailwind">
-                            <div class="skill-icon">🎨</div>
-                            <span>Tailwind CSS</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Backend</h3>
-                    <div class="skill-items">
-                        <div class="skill-item" data-skill="Node.js">
-                            <div class="skill-icon">🟢</div>
-                            <span>Node.js</span>
-                        </div>
-                        <div class="skill-item" data-skill="Python">
-                            <div class="skill-icon">🐍</div>
-                            <span>Python</span>
-                        </div>
-                        <div class="skill-item" data-skill="PostgreSQL">
-                            <div class="skill-icon">🐘</div>
-                            <span>Firestore</span>
-                        </div>
-                        <div class="skill-item" data-skill="MongoDB">
-                            <div class="skill-icon">🍃</div>
-                            <span>MongoDB</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Tools</h3>
-                    <div class="skill-items">
-                        <div class="skill-item" data-skill="Git">
-                            <div class="skill-icon">📚</div>
-                            <span>Git</span>
-                        </div>
-                        <div class="skill-item" data-skill="Docker">
-                            <div class="skill-icon">🐳</div>
-                            <span>Docker</span>
-                        </div>
-                        <div class="skill-item" data-skill="Figma">
-                            <div class="skill-icon">🎯</div>
-                            <span>Figma</span>
-                        </div>
-                        <div class="skill-item" data-skill="AWS">
-                            <div class="skill-icon">☁️</div>
-                            <span>GCP</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Featured Projects</h2>
-                <p class="section-subtitle">Some of my recent work</p>
-            </div>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="image-placeholder"></div>
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>WORQ ERP</h3>
-                        <p>Cross-departmental portal for managing and tracking projects, tasks, and resources.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Angular</span>
-                            <span class="tech-tag">Express</span>
-                            <span class="tech-tag">Firestore</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="image-placeholder"></div>
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Qarma Points Text Classification</h3>
-                        <p>Classify paragraph into designated WORQ values</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">TensorFlow</span>
-                            <span class="tech-tag">Flask</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="image-placeholder"></div>
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-                            </div>
-                        </div>
-                    </div> 
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Let's Connect</h2>
-                <p class="section-subtitle">Ready to bring your ideas to life?</p>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <p>liyana.khairul@worq.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Location</h4>
-                            <p>Kuala Lumpur, Malaysia</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h4>Phone</h4>
-                            <p>+60123456789</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea placeholder="Your Message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <span class="logo-text">AC</span>
-                    <p>Creative Developer</p>
-                </div>
-                <div class="social-links">
-                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Liyana Khairul. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
