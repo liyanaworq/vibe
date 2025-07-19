@@ -11,6 +11,59 @@ const sidebarItems = document.querySelectorAll('.sidebar-item');
 const sections = document.querySelectorAll('.section');
 const pageTitle = document.querySelector('.page-title');
 
+// Mobile menu elements
+const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+const sidebar = document.querySelector('.sidebar');
+const sidebarOverlay = document.querySelector('.sidebar-overlay');
+
+// Create mobile menu toggle if it doesn't exist
+if (!mobileMenuToggle) {
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'mobile-menu-toggle';
+    toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    document.body.appendChild(toggleBtn);
+}
+
+// Create sidebar overlay if it doesn't exist
+if (!sidebarOverlay) {
+    const overlay = document.createElement('div');
+    overlay.className = 'sidebar-overlay';
+    document.body.appendChild(overlay);
+}
+
+// Mobile menu functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.querySelector('.mobile-menu-toggle');
+    const overlay = document.querySelector('.sidebar-overlay');
+    
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('mobile-open');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('mobile-open') ? 'hidden' : '';
+        });
+    }
+    
+    if (overlay) {
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('mobile-open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+    
+    // Close mobile menu when clicking on sidebar items
+    sidebarItems.forEach(item => {
+        item.addEventListener('click', () => {
+            if (window.innerWidth <= 900) {
+                sidebar.classList.remove('mobile-open');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+});
+
 sidebarItems.forEach(item => {
     item.addEventListener('click', () => {
         sidebarItems.forEach(i => i.classList.remove('active'));
@@ -34,7 +87,6 @@ sidebarItems.forEach(item => {
 });
 
 // Sidebar collapse/expand logic
-const sidebar = document.querySelector('.sidebar');
 const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
 sidebarToggleBtn.addEventListener('click', () => {
     sidebar.classList.toggle('collapsed');
@@ -94,10 +146,10 @@ function renderKnowledgeBase() {
     knowledgeBase.forEach((article, idx) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td><a href="#" class="link" data-action="view-article" data-idx="${idx}">${article.title}</a></td>
-            <td>${article.category}</td>
-            <td>${article.updated}</td>
-            <td>
+            <td data-label="Title"><a href="#" class="link" data-action="view-article" data-idx="${idx}">${article.title}</a></td>
+            <td data-label="Category">${article.category}</td>
+            <td data-label="Last Updated">${article.updated}</td>
+            <td data-label="Actions">
                 <button class="btn btn-primary btn-sm" data-action="edit-article" data-idx="${idx}">Edit</button>
                 <button class="btn btn-danger btn-sm" data-action="delete-article" data-idx="${idx}">Delete</button>
             </td>
@@ -133,11 +185,11 @@ function renderContacts() {
     contacts.forEach((contact, idx) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td><a href="#" class="link" data-action="view-contact" data-idx="${idx}">${contact.name}</a></td>
-            <td>${contact.email}</td>
-            <td>${contact.company}</td>
-            <td>${contact.status}</td>
-            <td>
+            <td data-label="Name"><a href="#" class="link" data-action="view-contact" data-idx="${idx}">${contact.name}</a></td>
+            <td data-label="Email">${contact.email}</td>
+            <td data-label="Company">${contact.company}</td>
+            <td data-label="Status">${contact.status}</td>
+            <td data-label="Actions">
                 <button class="btn btn-primary btn-sm" data-action="edit-contact" data-idx="${idx}">Edit</button>
                 <button class="btn btn-danger btn-sm" data-action="delete-contact" data-idx="${idx}">Delete</button>
             </td>
@@ -172,11 +224,11 @@ function renderTickets() {
     tickets.forEach((ticket, idx) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td><a href="#" class="link" data-action="view-ticket" data-idx="${idx}">${ticket.id}</a></td>
-            <td>${ticket.subject}</td>
-            <td>${ticket.status}</td>
-            <td>${ticket.assigned}</td>
-            <td>
+            <td data-label="Ticket ID"><a href="#" class="link" data-action="view-ticket" data-idx="${idx}">${ticket.id}</a></td>
+            <td data-label="Subject">${ticket.subject}</td>
+            <td data-label="Status">${ticket.status}</td>
+            <td data-label="Assigned To">${ticket.assigned}</td>
+            <td data-label="Actions">
                 <button class="btn btn-primary btn-sm" data-action="edit-ticket" data-idx="${idx}">Edit</button>
                 <button class="btn btn-danger btn-sm" data-action="delete-ticket" data-idx="${idx}">Delete</button>
             </td>
@@ -709,7 +761,6 @@ renderContacts();
 renderTickets();
 renderAnalytics();
 renderSettings();
-
 
 // Mobile Navigation Toggle
 hamburger.addEventListener('click', () => {
